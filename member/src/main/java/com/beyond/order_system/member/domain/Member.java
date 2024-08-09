@@ -4,7 +4,6 @@ import com.beyond.order_system.common.domain.Address;
 import com.beyond.order_system.common.domain.BaseTimeEntity;
 import com.beyond.order_system.member.dto.MemberDetResDto;
 import com.beyond.order_system.member.dto.MemberListResDto;
-import com.beyond.order_system.ordering.domain.Ordering;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,8 +42,6 @@ public class Member extends BaseTimeEntity {
     @Builder.Default
     private Role role = Role.USER;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Ordering> orderList;
 
     public MemberDetResDto detFromEntity() {
         return MemberDetResDto.builder()
@@ -64,7 +61,6 @@ public class Member extends BaseTimeEntity {
                 .name(this.name)
                 .email(this.email)
                 .role(this.role)
-                .orderCount(this.orderList.size())
                 .build();
     }
 

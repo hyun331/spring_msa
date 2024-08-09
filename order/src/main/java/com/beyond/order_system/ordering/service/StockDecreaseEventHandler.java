@@ -2,8 +2,7 @@ package com.beyond.order_system.ordering.service;
 
 import com.beyond.order_system.common.config.RabbitMqConfig;
 import com.beyond.order_system.ordering.dto.StockDecreaseEvent;
-import com.beyond.order_system.product.domain.Product;
-import com.beyond.order_system.product.repository.ProductRepository;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Message;
@@ -21,9 +20,6 @@ public class StockDecreaseEventHandler {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
-
-    @Autowired
-    private ProductRepository productRepository;
 
 
     public void publish(StockDecreaseEvent event){
@@ -45,8 +41,8 @@ public class StockDecreaseEventHandler {
         try{
             stockDecreaseEvent = objectMapper.readValue(messageBody, StockDecreaseEvent.class);
             //재고 update
-            Product product = productRepository.findById(stockDecreaseEvent.getProductId()).orElseThrow(()->new EntityNotFoundException("product not found"));
-            product.updateStockQunatity(stockDecreaseEvent.getProductCount());
+//            Product product = productRepository.findById(stockDecreaseEvent.getProductId()).orElseThrow(()->new EntityNotFoundException("product not found"));
+//            product.updateStockQunatity(stockDecreaseEvent.getProductCount());
 
         }catch (JsonProcessingException e){
             throw new RuntimeException(e);

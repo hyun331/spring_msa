@@ -1,6 +1,5 @@
 package com.beyond.order_system.ordering.dto;
 
-import com.beyond.order_system.member.domain.Member;
 import com.beyond.order_system.ordering.domain.OrderDetail;
 import com.beyond.order_system.ordering.domain.OrderStatus;
 import com.beyond.order_system.ordering.domain.Ordering;
@@ -31,9 +30,5 @@ public class OrderingReqDto {
 //        private Integer productCount;
 //    }
 //
-    public Ordering toEntity(Member member){
-        return Ordering.builder()
-                .member(member)
-                .build();
-    }
+
 }
